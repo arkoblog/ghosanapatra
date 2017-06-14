@@ -1,3 +1,6 @@
+### 1. Setting up the server side of things
+We begin by first initializing the server side. For this, we are going to be using the ExpressJS framework.
+
 #### Initialize an empty node project
 
 `npm init -y`
@@ -49,13 +52,17 @@ app.listen(portNumber, () => {
 `npm i -S express`
 
 
+#### Install nodemon
+
+`npm i --save-dev nodemon`
+
 #### Update `/package.json` with the server script
 
 ```javascript
-  "scripts": {
-    "server": "babel-node server/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+"scripts": {
+	"server": "nodemon --watch server --exec babel-node -- server/index",
+	"test": "echo \"Error: no test specified\" && exit 1"
+},
 ```
 
 ####  Create `/.babelrc` file 
