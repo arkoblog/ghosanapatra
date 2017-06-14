@@ -251,3 +251,91 @@ render(routes, document.getElementById('app'))
 
 #### Run server
 `npm run server`
+
+
+### Refactor client code
+
+#### Update App component @ `/client/components/App.js`
+```javascript
+import React from 'react';
+import HomePage from './HomePage';
+
+class App extends React.Component {
+	render() {
+		return (
+				<div>
+					<HomePage/>
+				</div>
+			)
+	}
+};
+
+export default App;
+```
+
+#### Create HomePage component @  `/client/components/HomePage.js`
+```javascript
+import React from 'react';
+import css from '../static/css/homepage.css'
+
+class HomePage extends React.Component {
+	render() {
+		return (
+				<div className="container-fluid banner">
+						<h1> Welcome to the Auth0 test application </h1>
+						<h5>This app was design to test the authentication service provided by Auth0. The app was built using React and Redux.</h5>
+						<button className="btn btn-danger btn-lg">Click here to login</button>
+				</div>
+			)
+	}
+};
+
+export default HomePage;
+```
+
+#### Refactor `client/index.js` code a little
+```javascript
+import React from 'react';
+import { render } from 'react-dom';
+import routes from './config/routes'
+
+render(routes, document.getElementById('app'))
+```
+
+#### Create `/config/routes.js'
+```javascript
+import React from 'react';
+import { BrowserRouter as Router, Route, IndexRoute } from 'react-router-dom';
+
+import App from '../components/App';
+import HomePage from '../components/HomePage';
+
+
+export default (
+	<Router>
+		<App>
+			<Route exact path = "/" component={HomePage}/>
+		</App>
+	</Router>
+)
+```
+#### Install style-loader to load css files
+`npm i -S style-loader css-loader`
+
+#### Create homepage.css @ `/client/static/css/homepage.css`
+```css
+.banner {
+    color:#fff;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    width: 100vw;
+    height: 100vh;
+    background-color: #4285f4;
+}
+```
+
+#### Run server
+`npm run server`
+
+
