@@ -1,12 +1,12 @@
-Initialize an empty node project
+#### Initialize an empty node project
 
 `npm init -y`
 
-Initailize empty git repo
+#### Initailize empty git repo
 
 git init
 
-Create a server folder and create index.js file inside it:
+#### Create index.js @ `/server/index.html`:
 
 ```javascript
 import express from 'express';
@@ -25,14 +25,31 @@ app.listen(portNumber, () => {
 })
 
 ```
+#### Create index.html page @ `/server/index.html`
 
-Install express and babel-cli
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Auth0 Testing</title>
+</head>
+
+<body>
+    <h1>Hello world!</h1>
+</body>
+
+</html>
+
+```
+
+#### Install express and babel-cli
 
 `npm i --save-dev babel-cli`
 `npm i -S express`
 
 
-Update package.json with the server script
+#### Update `/package.json` with the server script
 
 ```javascript
   "scripts": {
@@ -41,7 +58,7 @@ Update package.json with the server script
   },
 ```
 
-Create .babelrc file in root folder
+####  Create `/.babelrc` file 
 
 ```javascript
 {
@@ -49,8 +66,9 @@ Create .babelrc file in root folder
 }
 
 ```
-Install required es2015 preset dependency
+#### Install required es2015 preset dependency
 
 `npm i --save-dev babel-preset-es2015`
 
-
+#### Run server
+`npm run server`
