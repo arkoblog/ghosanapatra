@@ -209,3 +209,45 @@ export default {
 
 #### Run server
 `npm run server`
+
+### 3. Setting up basic routing and bootstrap
+
+Include bootstrap css in `/server/index.html`
+
+```html
+<head>
+...
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+...
+</head>
+
+```
+
+#### Import react-router-dom @ `/client/index.js` , create routes variable and render that instead. 
+
+```javascript
+import React from 'react';
+import { render } from 'react-dom';
+
+// Change 1 - Import react-router-dome components 
+import { BrowserRouter as Router, Route, IndexRoute } from 'react-router-dom';
+
+import App from './components/App';
+
+
+// Change 2 - Create routes variable
+const routes = (
+	<Router>
+		<App/>
+	</Router>
+)
+
+// Change 3 - Render routes variable instead
+render(routes, document.getElementById('app'))
+```
+
+#### Install react-router-dom;
+`npm i -S react-router-dom`
+
+#### Run server
+`npm run server`
