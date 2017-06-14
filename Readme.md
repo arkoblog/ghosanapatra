@@ -79,3 +79,133 @@ app.listen(portNumber, () => {
 
 #### Run server
 `npm run server`
+
+### 2. Setting up a react component:
+
+#### Update the body section of `/server/index.html`
+
+```html
+<body>
+    <div id="app"></div>
+    <script src="bundle.js"/>
+</body>
+```
+
+#### Create entry point for react app @ `/client/index.js`
+
+```javascript
+import React from 'react';
+import { render } from 'react-dom';
+
+import App from './components/App';
+
+render(<App/>, document.getElementById('app'))
+
+```
+
+Create App component @ `/client/components/App.js`
+```javascript
+import React from 'react';
+
+class App extends React.Component {
+	render() {
+		return (
+				<h1>Hello from react!</h1>
+			)
+	}
+};
+
+export default App;
+```
+
+#### Install react and react-dom
+`npm i -S react react-dom`
+
+#### Update `/server/index.js` to import and use webpack with webpack config file (Change 1 and Change 2):
+
+```javascript
+// server/index.js
+
+import express from 'express';
+import path from 'path'
+
+// Change - 1 (Import webpack)
+import webpack from 'webpack';
+import webpackMiddleware from 'webpack-dev-middleware';
+import config from '../webpack.config.dev'
+//End of change1
+
+let portNumber = 4000;
+let app = express();
+
+// Change 2 - Use middleware
+app.use(webpackMiddleware(webpack(config)))
+//
+
+app.get('/*', (req, res) => {
+	res.sendFile(path.join(__dirname, './index.html'));
+});
+
+app.listen(portNumber, () => {
+	console.log(`App is running on port ${portNumber}`)
+})
+```
+
+#### Create webpack config file at `/webpack.config.dev.js`
+
+```javascript
+import path from 'path';
+
+export default {
+    devtool: 'source-map',
+    entry: [
+        './client/index'
+    ],
+    output: {
+        path: path.join(__dirname, 'dist'),
+        filename: 'bundle.js',
+        publicPath: '/static/'
+    },
+    module: {
+        loaders: [
+            // js
+            {
+                test: /\.js$/,
+                loaders: ['babel-loader'],
+                include: [path.join(__dirname, 'client'),
+                path.join(__dirname, 'server/shared')]
+            },
+            // CSS
+            {
+                test: /\.css$/,
+                loader: 'style-loader!css-loader'
+            },
+            {
+                test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
+                loader: 'url-loader'
+            }
+        ]
+    },
+    node: {
+        net: 'empty',
+        dns: 'empty'
+    }
+};
+```
+
+
+#### Install webpack and webpack-dev-middleware
+`npm i --save-dev webpack webpack-dev-middleware`
+
+#### Install babel-loader and babel react preset
+`npm i --save-dev babel-loader babel-preset-react`
+
+#### Update `/.babelrc/` file to include react preset:
+```javascript
+{
+	"presets": ["es2015", "react"]
+}
+```
+
+#### Run server
+`npm run server`
