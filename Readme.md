@@ -1,15 +1,15 @@
-### 1. Setting up the server side of things
+# 1. Setting up the server side of things
 We begin by first initializing the server side. For this, we are going to be using the ExpressJS framework.
 
-#### 1.1. Initialize an empty node project
+## 1.1. Initialize an empty node project
 
 `npm init -y`
 
-#### 1.2. Initailize empty git repo
+## 1.2. Initailize empty git repo
 
 git init
 
-#### 1.3. Create index.js @ `/server/index.html`:
+## 1.3. Create index.js @ `/server/index.html`:
 
 ```javascript
 import express from 'express';
@@ -28,7 +28,7 @@ app.listen(portNumber, () => {
 })
 
 ```
-#### 1.4. Create index.html page @ `/server/index.html`
+## 1.4. Create index.html page @ `/server/index.html`
 
 ```html
 <!DOCTYPE html>
@@ -46,17 +46,17 @@ app.listen(portNumber, () => {
 
 ```
 
-#### 1.5. Install express and babel-cli
+## 1.5. Install express and babel-cli
 
 `npm i --save-dev babel-cli`
 `npm i -S express`
 
 
-#### 1.6. Install nodemon
+## 1.6. Install nodemon
 
 `npm i --save-dev nodemon`
 
-#### 1.7. Update `/package.json` with the server script
+## 1.7. Update `/package.json` with the server script
 
 ```javascript
 "scripts": {
@@ -65,7 +65,7 @@ app.listen(portNumber, () => {
 },
 ```
 
-####  1.8. Create `/.babelrc` file 
+##  1.8. Create `/.babelrc` file 
 
 ```javascript
 {
@@ -73,17 +73,17 @@ app.listen(portNumber, () => {
 }
 
 ```
-#### 1.9. Install required es2015 preset dependency
+## 1.9. Install required es2015 preset dependency
 
 `npm i --save-dev babel-preset-es2015`
 
-#### 1.10. Run server
+## 1.10. Run server
 `npm run server`
 
 ### 2. Setting up a react component:
 Our next goal is to create a react app, and host it through the index.js file.
 
-#### 2.1. Update the body section of `/server/index.html`
+## 2.1. Update the body section of `/server/index.html`
 
 ```html
 <body>
@@ -92,7 +92,7 @@ Our next goal is to create a react app, and host it through the index.js file.
 </body>
 ```
 
-#### 2.2. Create entry point for react app @ `/client/index.js`
+## 2.2. Create entry point for react app @ `/client/index.js`
 
 ```javascript
 import React from 'react';
@@ -119,10 +119,10 @@ class App extends React.Component {
 export default App;
 ```
 
-#### 2.3. Install react and react-dom
+## 2.3. Install react and react-dom
 `npm i -S react react-dom`
 
-#### 2.4. Update `/server/index.js` to import and use webpack with webpack config file (Change 1 and Change 2):
+## 2.4. Update `/server/index.js` to import and use webpack with webpack config file (Change 1 and Change 2):
 
 ```javascript
 // server/index.js
@@ -152,7 +152,7 @@ app.listen(portNumber, () => {
 })
 ```
 
-#### 2.5. Create webpack config file at `/webpack.config.dev.js`
+## 2.5. Create webpack config file at `/webpack.config.dev.js`
 
 ```javascript
 import path from 'path';
@@ -195,26 +195,26 @@ export default {
 ```
 
 
-#### 2.6. Install webpack and webpack-dev-middleware
+## 2.6. Install webpack and webpack-dev-middleware
 `npm i --save-dev webpack webpack-dev-middleware`
 
-#### 2.7. Install babel-loader and babel react preset
+## 2.7. Install babel-loader and babel react preset
 `npm i --save-dev babel-loader babel-preset-react`
 
-#### 2.8. Update `/.babelrc/` file to include react preset:
+## 2.8. Update `/.babelrc/` file to include react preset:
 ```javascript
 {
 	"presets": ["es2015", "react"]
 }
 ```
 
-#### 2.9. Run server
+## 2.9. Run server
 `npm run server`
 
 ### 3. Setting up basic routing and bootstrap
 Next step would then be to set up basic routing using react-router-dom and also setup bootstrap. 
 
-#### 3.1. Include bootstrap css in `/server/index.html`
+## 3.1. Include bootstrap css in `/server/index.html`
 
 ```html
 <head>
@@ -225,7 +225,7 @@ Next step would then be to set up basic routing using react-router-dom and also 
 
 ```
 
-#### 3.2. Import react-router-dom @ `/client/index.js` , create routes variable and render that instead. 
+## 3.2. Import react-router-dom @ `/client/index.js` , create routes variable and render that instead. 
 
 ```javascript
 import React from 'react';
@@ -248,17 +248,17 @@ const routes = (
 render(routes, document.getElementById('app'))
 ```
 
-#### 3.3. Install react-router-dom;
+## 3.3. Install react-router-dom;
 `npm i -S react-router-dom`
 
-#### 3.4. Run server
+## 3.4. Run server
 `npm run server`
 
 
 ### 4. Refactor client code, create Homepage component
 Simple refactoring and styling 
 
-#### 4.1. Update App component @ `/client/components/App.js`
+## 4.1. Update App component @ `/client/components/App.js`
 ```javascript
 import React from 'react';
 import HomePage from './HomePage';
@@ -276,7 +276,7 @@ class App extends React.Component {
 export default App;
 ```
 
-#### 4.2. Create HomePage component @  `/client/components/HomePage.js`
+## 4.2. Create HomePage component @  `/client/components/HomePage.js`
 ```javascript
 import React from 'react';
 import css from '../static/css/homepage.css'
@@ -296,7 +296,7 @@ class HomePage extends React.Component {
 export default HomePage;
 ```
 
-#### 4.3. Refactor `client/index.js` code a little
+## 4.3. Refactor `client/index.js` code a little
 ```javascript
 import React from 'react';
 import { render } from 'react-dom';
@@ -305,7 +305,7 @@ import routes from './config/routes'
 render(routes, document.getElementById('app'))
 ```
 
-#### 4.4. Create `/config/routes.js'
+## 4.4. Create `/config/routes.js'
 ```javascript
 import React from 'react';
 import { BrowserRouter as Router, Route, IndexRoute } from 'react-router-dom';
@@ -322,10 +322,10 @@ export default (
 	</Router>
 )
 ```
-#### 4.5. Install style-loader to load css files
+## 4.5. Install style-loader to load css files
 `npm i -S style-loader css-loader`
 
-#### Create homepage.css @ `/client/static/css/homepage.css`
+## Create homepage.css @ `/client/static/css/homepage.css`
 ```css
 .banner {
     color:#fff;
@@ -338,7 +338,7 @@ export default (
 }
 ```
 
-#### 4.6. Run server
+## 4.6. Run server
 `npm run server`
 
 
