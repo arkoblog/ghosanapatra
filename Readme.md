@@ -325,7 +325,7 @@ export default (
 ### 4.5. Install style-loader to load css files
 `npm i -S style-loader css-loader`
 
-### Create homepage.css @ `/client/static/css/homepage.css`
+### 4.6. Create homepage.css @ `/client/static/css/homepage.css`
 ```css
 .banner {
     color:#fff;
@@ -338,7 +338,105 @@ export default (
 }
 ```
 
-### 4.6. Run server
+### 4.7. Run server
 `npm run server`
 
+
+# 5. Redux integration
+
+### 5.1. Load redux, react-redux and redux-thunk dependencies 
+
+`npm i -S redux redux-thunk react-redux`
+
+
+### 5.2. Update `/client/routes.js` to use these dependencies:
+```javascript
+// some other code
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { createStore, applyMiddleware, compose } from 'redux';
+// some other code
+```
+
+### 5.3. Create store @ `/client/store.js` 
+```javascript
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+
+const store = createStore(
+    (state = {}) => state,  
+	compose (
+		applyMiddleware(thunk),
+		window.devToolsExtension ? window.devToolsExtension() : f => f 
+		)
+);
+
+export default store;
+```
+
+
+### 5.4. Use provider to pass that store into the react app @ `/client/config/routes.js`  
+```javascript
+import React from 'react';
+import { BrowserRouter as Router, Route, IndexRoute } from 'react-router-dom';
+import { Provider } from 'react-redux';
+
+import store from '../store'
+
+import App from '../components/App';
+import HomePage from '../components/HomePage';
+
+export default (
+	<Provider store = {store}> 
+	<Router>
+		<App>
+			<Route exact path = "/" component={HomePage}/>
+		</App>
+	</Router>
+	</Provider>
+)
+```
+
+### 5.5. Create rootReducer.js @ `/client/reducers/rootReducer.js`
+```javascript
+import { combineReducers } from 'redux';
+import auth from './auth'
+
+export default combineReducers ({
+	auth
+})
+```
+
+### 5.6. Create auth reducer @ `/client/reducers/auth.js`
+```javascript
+import {SET_CURRENT_USER} from '../actions/types'
+import isEmpty from 'lodash/isEmpty'
+
+const initialState = {
+	isAuthenticated: false,
+	user: {}
+
+}
+
+export default (state = initialState, action = {}) => {
+    // console.log(action.type)
+    switch (action.type) {
+        case SET_CURRENT_USER: 
+        	// console.log("MyAction",action)
+        	return {
+        		isAuthenticated: !isEmpty(action.user),
+        		user: action.user
+        	}
+        default: return state;
+    }
+}
+```
+
+### 5.7. Create action definitions @`/client/actions/types.js`
+```javascript
+export const SET_CURRENT_USER = 'SET_CURRENT_USER'
+```
+
+### 5.7. Install lodash as dependency
+`npm i -S lodash`
 
