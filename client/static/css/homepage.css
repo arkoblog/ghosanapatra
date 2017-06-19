@@ -7,3 +7,9 @@
     height: 100vh;
     background-color: #4285f4;
 }
+
+
+.facebook-login,
+.google-login {
+	margin: 5px;
+}

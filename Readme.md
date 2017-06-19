@@ -287,7 +287,6 @@ class HomePage extends React.Component {
 				<div className="container-fluid banner">
 						<h1> Welcome to the Auth0 test application </h1>
 						<h5>This app was design to test the authentication service provided by Auth0. The app was built using React and Redux.</h5>
-						<button className="btn btn-danger btn-lg">Click here to login</button>
 				</div>
 			)
 	}
@@ -439,4 +438,72 @@ export const SET_CURRENT_USER = 'SET_CURRENT_USER'
 
 ### 5.7. Install lodash as dependency
 `npm i -S lodash`
+
+# 6. Incorporate Facebook Login
+
+### 6.1 Install facebook login button and google login component
+`npm install --save react-facebook-login-component react-google-login-component`
+
+
+### 6.2 Create FacebookLogin component @ `/client/components/FacebookLogin.js`
+```javascript
+import React from 'react';
+import { FacebookLogin } from 'react-facebook-login-component';
+ 
+class Login extends React.Component{
+ 
+  constructor (props, context) {
+    super(props, context);
+  }
+ 
+  responseFacebook (response) {
+    console.log(response);
+    //anything else you want to do(save to localStorage)... 
+  }
+ 
+  render () {
+    return (
+      <div>
+        <FacebookLogin socialId="1921128611475300"
+                       language="en_US"
+                       scope="public_profile,email"
+                       responseHandler={this.responseFacebook}
+                       xfbml={true}
+                       fields="id,email,name"
+                       version="v2.5"
+                       className="facebook-login"
+                       buttonText="Login With Facebook"/>
+      </div>
+    );
+  }
+ 
+}
+ 
+export default Login;
+```
+### 6.3. Create Google login Component  @ `/client/components/FacebookLogin.js`
+
+
+### 6.3 Update `/clients/components/HomePage.js` to include FacebookLogin component and GoogleLogin component
+```javascript
+import React from 'react';
+import css from '../static/css/homepage.css'
+import FacebookLogin from './logins/FaceBookLogin'
+import GoogleLogin from './logins/GoogleLogin'
+
+class HomePage extends React.Component {
+	render() {
+		return (
+			<div className="container-fluid banner">
+				<h1> Welcome to the Auth0 test application </h1>
+				<h5>This app was design to test the authentication service provided by Auth0. The app was built using React and Redux.</h5>
+				<FacebookLogin/>
+				<GoogleLogin/>
+			</div>
+		)
+	}
+};
+
+export default HomePage;
+```
 
