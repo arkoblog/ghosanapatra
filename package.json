@@ -1,15 +1,15 @@
 {
-  "name": "auth0-test",
+  "name": "ghosanapatra-client",
   "version": "1.0.0",
-  "description": "",
+  "description": "We begin by first initializing the server side. For this, we are going to be using the ExpressJS framework.",
   "main": "index.js",
   "scripts": {
     "server": "nodemon --watch server --exec babel-node -- server/index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Arogya Koirala",
+  "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-loader": "^7.0.0",
@@ -32,5 +32,13 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
     "style-loader": "^0.18.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arkoblog/ghosanapatra.git"
+  },
+  "bugs": {
+    "url": "https://github.com/arkoblog/ghosanapatra/issues"
+  },
+  "homepage": "https://github.com/arkoblog/ghosanapatra#readme"
 }
